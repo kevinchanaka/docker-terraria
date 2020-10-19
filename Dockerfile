@@ -1,17 +1,19 @@
 # first stage: defining builder image here
 
 FROM alpine:latest as builder
+ARG VERSION=1411
+
 RUN mkdir -p /tmp/data 
 WORKDIR /tmp
 
 # downloading and organising terraria server files
-RUN wget https://www.terraria.org/system/dedicated_servers/archives/000/000/039/original/terraria-server-1405.zip?1591301368 && \
-    unzip *1405.zip* && \
-    chmod +x 1405/Linux/TerrariaServer.bin.x86_64 && \
-    cp -r 1405/Linux server && \
+RUN wget https://www.terraria.org/system/dedicated_servers/archives/000/000/041/original/terraria-server-${VERSION}.zip && \
+    unzip *${VERSION}.zip* && \
+    chmod +x ${VERSION}/Linux/TerrariaServer.bin.x86_64 && \
+    cp -r ${VERSION}/Linux server && \
     rm server/System* && \ 
-    rm -r 1405 && \
-    rm *1405.zip*
+    rm -r ${VERSION} && \
+    rm *${VERSION}.zip*
 
 # copying start script to directory
 COPY entrypoint.sh /tmp/server
