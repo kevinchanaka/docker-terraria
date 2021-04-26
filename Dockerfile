@@ -1,13 +1,13 @@
 # first stage: defining builder image here
 
 FROM alpine:latest as builder
-ARG VERSION=1421
+ARG VERSION=1422
 
 RUN mkdir -p /tmp/data 
 WORKDIR /tmp
 
 # downloading and organising terraria server files
-RUN wget https://terraria.org/system/dedicated_servers/archives/000/000/044/original/terraria-server-1421.zip && \
+RUN wget https://terraria.org/system/dedicated_servers/archives/000/000/045/original/terraria-server-1422.zip && \
     unzip *${VERSION}.zip* && \
     chmod +x ${VERSION}/Linux/TerrariaServer.bin.x86_64 && \
     cp -r ${VERSION}/Linux server && \
