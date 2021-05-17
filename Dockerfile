@@ -1,13 +1,13 @@
 # first stage: defining builder image here
 
 FROM alpine:latest as builder
-ARG VERSION=1422
+ARG VERSION=1423
 
 RUN mkdir -p /tmp/data 
 WORKDIR /tmp
 
 # downloading and organising terraria server files
-RUN wget https://terraria.org/system/dedicated_servers/archives/000/000/045/original/terraria-server-1422.zip && \
+RUN wget https://terraria.org/system/dedicated_servers/archives/000/000/046/original/terraria-server-1423.zip && \
     unzip *${VERSION}.zip* && \
     chmod +x ${VERSION}/Linux/TerrariaServer.bin.x86_64 && \
     cp -r ${VERSION}/Linux server && \
@@ -57,10 +57,6 @@ COPY --chown=1000:1000 --from=builder /tmp/ /app/
 RUN mv /app/server/attach /usr/bin
 
 USER terraria
-
-# Applying fix to TerrariaServer.exe as mentioned here
-# https://forums.terraria.org/index.php?threads/terraria-server-1-4-0-5-world-generation-crash.93411/
-RUN echo "0086519: 15" | xxd -r - /app/server/TerrariaServer.exe
 
 VOLUME ["/app/data"]
 
