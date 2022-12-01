@@ -1,7 +1,7 @@
 # first stage: defining builder image here
 
 FROM alpine:latest as builder
-ARG VERSION=1432
+ARG VERSION=1449
 
 RUN mkdir -p /tmp/data 
 WORKDIR /tmp
